@@ -1,0 +1,25 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.feature_selection import chi2
+from sklearn.model_selection import train_test_split
+df = pd.read_csv("churn_data_st.csv")
+df.head()
+df = df[['gender','Contract','PaperlessBilling','Churn']]
+df["gender"] = df["gender"].map({"Female":1,"Male":0})
+df["Contract"] = df["Contract"].map({"Month-to-month":0,"One year" : 1,"Two year":2})
+df["PaperlessBilling"] = df["PaperlessBilling"].map({"Yes":0,"No":0})
+df["Churn"] = df["Churn"].map({"Yes":1,"No":0})
+df.head()
+x = df.iloc[:,0:3]
+y = df.iloc[:,-1]
+f_score = chi2(x,y)
+f_score
+p_value = pd.Series(f_score[1],index = x.columns)
+p_value.sort_values(ascending = True,inplace = True)
+p_value
+p_value.plot(kind="bar")
+plt.xlabel("Features",fontsize = 20)
+plt.ylabel("P_values",fontsize = 20)
+plt.title("Chi Squared Test Based On p_value")
+plt.show()
