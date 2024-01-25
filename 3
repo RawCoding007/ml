@@ -1,0 +1,21 @@
+from pandas import read_csv
+from numpy import set_printoptions
+from sklearn.modeL_selection import train_test_split
+from sklearn.feature_selection import SelectKBest
+from sklearn.feature_selection import f_classif
+from matplotlib import pyplot
+path = r'diabetes.csv'
+names = ['preg','plas','pres','skin','test','mass','pedi','age','class']
+dataframe = read_csv(path,names=names)
+dataframe.head()
+array = dataframe.values
+X = array[:,:8]
+Y = array[:,8]
+x_train,x_test,y_train,y_test = train_test_split(X,Y,test_size=0.33,random_state=1)
+x_train = fs.transform(x_train)
+x_test = fs.tranform(x_test)
+for i in range(sen(fs.scores_)):
+ print('Feature %d : %f' %(i,fs.scores_[i]))
+# Plot the scores
+pyplot.bar([i for i in range(len(fs.scores_))],fs_scores_)
+pyplot.show()
