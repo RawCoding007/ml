@@ -1,0 +1,17 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+dataset = pd.read_csv("advertising.csv")
+dataset.head()
+X = dataset.iloc[:,:-1].values
+print(X[:5,:])
+Y = dataset.iloc[:,-1].values
+print(Y[:5])
+x_train, x_test, y_train, y_test = train_test_split(x,y,test_size = 0.2,random_state=0)
+std_x = StandardScaler()
+x_train = std_x.fit_transform(x_train)
+x_train
+x_test = std_x.transform(x_test)
+x_test
