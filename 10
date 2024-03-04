@@ -1,0 +1,23 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as mtp
+dataset=pd.read_csv('/Mall_Customers.csv')
+import scipy.cluster.hierarchy as shc
+dendro=shc.dendrogram(shc.linkage(x,method='ward'))
+mtp.title("Dendrogram Plot")
+mtp.ylabel("Euclidean Distance")
+mtp.xlabel("Customers")
+mtp.show()
+from sklearn.cluster import AgglomerativeClustering
+hc=AgglomerativeClustering(n_clusters=5,affinity='euclidean',linkage='ward')
+y_pred=hc.fit_predict(x)
+mtp.scatter(x[y_pred==0,0],x[y_pred==0,1],s=100,color='blue',label='Cluster1')
+mtp.scatter(x[y_pred==1,0],x[y_pred==1,1],s=100,color='red',label='Cluster2')
+mtp.scatter(x[y_pred==2,0],x[y_pred==2,1],s=100,color='green',label='Cluster3')
+mtp.scatter(x[y_pred==3,0],x[y_pred==3,1],s=100,color='cyan',label='Cluster4')
+mtp.scatter(x[y_pred==4,0],x[y_pred==4,1],s=100,color='magenta',label='Cluster5')
+mtp.title('Cluters of Customers')
+mtp.ylabel('Annualincome')
+mtp.xlabel('Spending Score(1-100)')
+mtp.legend()
+mtp.show()
