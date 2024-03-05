@@ -12,10 +12,12 @@ array = dataframe.values
 X = array[:,:8]
 Y = array[:,8]
 x_train,x_test,y_train,y_test = train_test_split(X,Y,test_size=0.33,random_state=1)
+fs=SelectKBest(score_func=f_classif,k='all')
+fs.fit(x_train,y_train)
 x_train = fs.transform(x_train)
 x_test = fs.tranform(x_test)
-for i in range(sen(fs.scores_)):
+for i in range(len(fs.scores_)):
  print('Feature %d : %f' %(i,fs.scores_[i]))
-# Plot the scores
-pyplot.bar([i for i in range(len(fs.scores_))],fs_scores_)
+
+pyplot.bar(range(len(fs.scores_)),fs.scores_)
 pyplot.show()
