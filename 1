@@ -1,30 +1,30 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-# Loading the dataset
+
 dataset = pd.read_csv('50_Startups_dataset.csv')
 dataset.head()
-# Identify the dependent and independent variables
-X = dataset.iloc[:,:-1].values # Independent Variables
-Y = dataset.iloc[:,-1].values # Dependent Variables
+
+X = dataset.iloc[:,:-1].values
+Y = dataset.iloc[:,-1].values 
 print("Independent Variables : ")
 print(X[:5,:])
 print("\n\nDependent Variables : ")
 print(Y[:5])
-# Dealing with missing data
+
 dataset.isnull().sum()
-# Filling missing values with 0
+
 new_df = dataset.fillna(0)
 new_df
-# Filling NaN values with forward fill value
+
 new_df1 = dataset.fillna(method="ffill")
 new_df1
-# Drop all rows having null values
+
 new_df2 = dataset.dropna()
 new_df2
-# Deleting all rows having NaN values
+
 new_df3 = dataset.dropna(how="all")
 new_df3
-# Replacing all NaN values with -99
+
 new_df4 = dataset.replace(to_replace = np.nan,value = -99)
 new_df4
